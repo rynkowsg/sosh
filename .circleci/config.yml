@@ -1,10 +1,11 @@
 version: 2.1
 
 orbs:
-  # orb info: https://circleci.com/developer/orbs/orb/rynkowsg/asdf
-  asdf: rynkowsg/asdf@0.1.2
   # orb info: https://circleci.com/developer/orbs/orb/rynkowsg/checkout
   checkout: rynkowsg/checkout@0.2.0
+  # orb info: https://circleci.com/developer/orbs/orb/rynkowsg/mise
+  # changelog: https://github.com/rynkowsg/mise-orb/blob/main/CHANGELOG.md
+  mise: rynkowsg/mise@0.1.0
   # orb info: https://circleci.com/developer/orbs/orb/rynkowsg/rynkowsg
   rynkowsg: rynkowsg/rynkowsg@0.4.0
 
@@ -13,40 +14,14 @@ jobs:
     executor: rynkowsg/docker_x86_cimg_base
     steps:
       - checkout/checkout: {depth: 1}
-      - asdf/install: {version: 0.14.0}
-      - restore_cache:
-          name: asdf - restore cache (partial)
-          keys:
-            - asdf-{{ checksum ".tool-versions" }}
-      - run:
-          name: asdf - add plugin
-          command: |
-            set -x
-            cd /tmp
-            git config --global advice.detachedHead false
-            asdf plugin add babashka https://github.com/fredZen/asdf-babashka.git
-            asdf plugin add bats https://github.com/timgluz/asdf-bats.git
-            asdf plugin add shellcheck https://github.com/luizm/asdf-shellcheck.git
-            asdf plugin add java https://github.com/rynkowsg/asdf-java.git
-            asdf plugin add shfmt https://github.com/luizm/asdf-shfmt.git
-      - run:
-          name: asdf - install tools
-          command: |
-            set -x
-            asdf install
-            . ~/.asdf/plugins/java/set-java-home.bash
-            bats --version
-            bb --version
-            java --version
-            shellcheck --version
-            shfmt --version
-      - save_cache:
-          name: asdf - save cache (partial)
-          key: asdf-{{ checksum ".tool-versions" }}
-          paths:
-            - ~/.asdf/installs
-            - ~/.asdf/plugins
-            - ~/.asdf/shims
+      - mise/setup:
+          mise_version: v2026.9.4 # https://github.com/jdx/mise/releases
+          # java is here because babashka needs it.
+          tools: >-
+            babashka java
+            bats
+            shellcheck
+            shfmt
       - run: bb lint
       - run: bb format check
       - run: bb test
