@@ -18,7 +18,7 @@ babashka = { version = "1.13.220", depends = ["java"] }
 
 # releases: https://github.com/bats-core/bats-core/releases
 # changelog: https://github.com/bats-core/bats-core/blob/master/docs/CHANGELOG.md
-bats = "1.10.0"
+bats = "1.14.0"
 
 # versions: https://openjdk.org/projects/jdk-updates/
 java = "openjdk-11.0.2"
@@ -30,7 +30,7 @@ shellcheck = "0.11.0"
 # releases: https://github.com/mvdan/sh/releases
 # changelog: https://github.com/mvdan/sh/blob/master/CHANGELOG.md
 # The tool lives in the mvdan/sh repo, the command is `shfmt`.
-shfmt = "3.8.0"
+shfmt = "3.14.1"
 
 [tasks."deps"]
 run = "mise outdated --bump"
