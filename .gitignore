@@ -9,6 +9,11 @@
 # MacOS
 .DS_Store
 
+# Env
+.env*
+!.envrc
+!.envrc.local.example
+
 # Clojure
 .cpcache
 .nrepl-port
