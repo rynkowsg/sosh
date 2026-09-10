@@ -2,16 +2,22 @@ version: 2.1
 
 orbs:
   # orb info: https://circleci.com/developer/orbs/orb/rynkowsg/checkout
-  checkout: rynkowsg/checkout@0.2.0
+  # readme: https://github.com/rynkowsg/orbs-rynkowsg/blob/main/orbs/checkout/README.md
+  checkout: rynkowsg/checkout@0.3.2
   # orb info: https://circleci.com/developer/orbs/orb/rynkowsg/mise
   # changelog: https://github.com/rynkowsg/mise-orb/blob/main/CHANGELOG.md
   mise: rynkowsg/mise@0.1.0
-  # orb info: https://circleci.com/developer/orbs/orb/rynkowsg/rynkowsg
-  rynkowsg: rynkowsg/rynkowsg@0.4.0
+
+executors:
+  docker_base_small:
+    # https://circleci.com/developer/images/image/cimg/base
+    # https://hub.docker.com/r/cimg/base/tags
+    docker: [{image: 'cimg/base:2026.09-24.04'}]
+    resource_class: small
 
 jobs:
   test:
-    executor: rynkowsg/docker_x86_cimg_base
+    executor: docker_base_small
     steps:
       - checkout/checkout: {depth: 1}
       - mise/setup:
