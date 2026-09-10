@@ -2,6 +2,10 @@
 
 ## [Unreleased](https://github.com/rynkowsg/sosh/compare/v0.2.0...HEAD)
 
+### Fixed
+
+- **cli**: Fix crash on `sosh` without arguments, so the help prints again
+
 ## [0.2.0](https://github.com/rynkowsg/sosh/compare/v0.1.2...v0.2.0) (2024-04-02)
 
 - Rename 'shellpack' to 'sosh'

@@ -397,6 +397,13 @@
                 (println e)
                 (throw e))))))))
 
+;; When no column is asked for, babashka.cli derives the set from the spec, so a
+;; spec where no option carries a :default gives rows one cell shorter than the
+;; header below and format-table blows up on the missing cell. Naming the columns
+;; keeps every row as wide as the header.
+(def cli-help-columns [:alias :option :ref :default :desc])
+(def cli-help-columns-names ["alias" "option" "ref" "default" "description"])
+
 (defn cli-help
   [_]
   (println
@@ -404,15 +411,20 @@
     "\n\n"
     (str "fetch\n"
          (cli/format-table
-           {:rows (concat [["alias" "option" "ref" "default" "description"]]
-                          (cli/opts->table @cli-fetch-opts))
+           {:rows (concat [cli-help-columns-names]
+                          (-> @cli-fetch-opts
+                              (assoc :columns cli-help-columns)
+                              (cli/opts->table)))
             :indent 0}))
     "\n\n"
     (str "pack\n"
          (cli/format-table
-           {:rows (concat [["alias" "option" "ref" "default" "description"]]
-                          (cli/opts->table @cli-pack-opts))
+           {:rows (concat [cli-help-columns-names]
+                          (-> @cli-pack-opts
+                              (assoc :columns cli-help-columns)
+                              (cli/opts->table)))
             :indent 0}))))
+#_(cli-help nil)
 
 (def cli-table
   (delay [{:cmds ["pack"] :fn cli-pack :spec (:spec @cli-pack-opts) :args->opts [:entry]}
