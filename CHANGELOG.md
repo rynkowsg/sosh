@@ -6,6 +6,10 @@
 
 - **cli**: Fix crash on `sosh` without arguments, so the help prints again
 
+### Changed
+
+- Stop declaring the dependencies Babashka already ships, so the first run downloads less
+
 ## [0.2.0](https://github.com/rynkowsg/sosh/compare/v0.1.2...v0.2.0) (2024-04-02)
 
 - Rename 'shellpack' to 'sosh'
