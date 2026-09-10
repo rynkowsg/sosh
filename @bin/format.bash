@@ -19,8 +19,8 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P || exit 1)"
 ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd -P || exit 1)"
 # Library Sourcing
-SHELL_GR_DIR="${SHELL_GR_DIR:-"${ROOT_DIR}/.github_deps/rynkowsg/shell-gr@v0.2.2"}"
-# shellcheck source=.github_deps/rynkowsg/shell-gr@v0.2.2/lib/tool/format.bash
+SHELL_GR_DIR="${SHELL_GR_DIR:-"${ROOT_DIR}/.github_deps/rynkowsg/shell-gr@v0.7.0"}"
+# shellcheck source=.github_deps/rynkowsg/shell-gr@v0.7.0/lib/tool/format.bash
 source "${SHELL_GR_DIR}/lib/tool/format.bash" # format_with_env
 
 main() {

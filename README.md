@@ -16,7 +16,7 @@ sosh a shell tool that uses `source` declaration in shell scripts to fetch remot
 
 Example: let's assume you need some color definitions and functions to serialize arrays in a Bash script. You can take them adding following `source` declaration:
 ```bash
-source "${ROOT_DIR}/.github_deps/rynkowsg/shell-gr@v0.2.2/lib/color.bash"
+source "${ROOT_DIR}/.github_deps/rynkowsg/shell-gr@v0.7.0/lib/color.bash"
 source "${ROOT_DIR}/.https_deps/gist.githubusercontent.com/TekWizely/c0259f25e18f2368c4a577495cd566cd/raw/b9e87c74565fb90a39bb7a1033f950773201dbf7/serialize_array.bash"
 ```
 If you call `sosh fetch` on the script, sosh will get these files for you.
