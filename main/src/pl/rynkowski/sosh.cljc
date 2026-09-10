@@ -2,8 +2,8 @@
 
 #?(:bb (do (require '[babashka.deps])
            (babashka.deps/add-deps '{:deps {;; Not in babashka. Keep in sync with :deps in deps.edn.
-                                            pl.rynkowski.clj-gr/fs {:git/url "https://github.com/rynkowsg/clj-gr.git" :git/sha "80e9dc0bd21c538ff443d8edc7df85f89d589a82" :deps/root "lib/fs"}
-                                            pl.rynkowski.clj-gr/lang {:git/url "https://github.com/rynkowsg/clj-gr.git" :git/sha "80e9dc0bd21c538ff443d8edc7df85f89d589a82" :deps/root "lib/lang"}
+                                            pl.rynkowski.clj-gr/fs {:git/url "https://github.com/rynkowsg/clj-gr.git" :git/sha "0faa2b49cff2ececa783c43201971b5195c86054" :deps/root "lib/fs"}
+                                            pl.rynkowski.clj-gr/lang {:git/url "https://github.com/rynkowsg/clj-gr.git" :git/sha "0faa2b49cff2ececa783c43201971b5195c86054" :deps/root "lib/lang"}
                                             #_:deps}})))
 
 (ns pl.rynkowski.sosh

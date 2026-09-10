@@ -20,8 +20,10 @@ babashka = { version = "1.13.220", depends = ["java"] }
 # changelog: https://github.com/bats-core/bats-core/blob/master/docs/CHANGELOG.md
 bats = "1.14.0"
 
-# versions: https://openjdk.org/projects/jdk-updates/
-java = "openjdk-11.0.2"
+# versions: https://github.com/adoptium/temurin21-binaries/releases
+# changelog: https://adoptium.net/temurin/release-notes/?version=21 (skip)
+# Babashka runs on it. Nothing in this repo calls java directly.
+java = "temurin-21.0.12+101.0.LTS"
 
 # releases: https://github.com/koalaman/shellcheck/releases
 # changelog: https://github.com/koalaman/shellcheck/blob/master/CHANGELOG.md

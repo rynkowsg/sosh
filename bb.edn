@@ -1,5 +1,5 @@
 {:deps {;; sorted
-        pl.rynkowski.clj-gr/bb #:git{:url "https://github.com/rynkowsg/clj-gr.git" :tag "v0.0.12" :sha "05be32e01c53aedac4248ba03bb7703dc030c49a" :deps/root "lib/bb"}
+        pl.rynkowski.clj-gr/bb #:git{:url "https://github.com/rynkowsg/clj-gr.git" :tag "v0.0.16" :sha "0faa2b49cff2ececa783c43201971b5195c86054" :deps/root "lib/bb"}
         this/repo {:local/root "."}}
 
  :tasks
