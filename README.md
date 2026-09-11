@@ -38,7 +38,7 @@ I'm talking about the stuff we use all the time, like logging, handling errors, 
 ## Install
 
 ```sh
-curl -s https://raw.githubusercontent.com/rynkowsg/sosh/v0.2.0/main/src/pl/rynkowski/sosh.cljc -o ~/.bin/sosh
+curl -s https://raw.githubusercontent.com/rynkowsg/sosh/v0.2.1/main/src/pl/rynkowski/sosh.cljc -o ~/.bin/sosh
 chmod +x ~/.bin/sosh
 ```
 The line above installs the script in `~/.bin`. That installation directory needs to be added to `PATH`.
