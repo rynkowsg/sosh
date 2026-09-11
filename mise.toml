@@ -1,0 +1,47 @@
+[settings]
+lockfile = true
+
+# Each tool is pinned to the backend it comes from, so the config states the
+# source instead of leaning on whatever mise's registry picks by default.
+[tool_alias]
+babashka = "github:babashka/babashka"
+bats = "aqua:bats-core/bats-core"
+java = "core:java"
+shellcheck = "aqua:koalaman/shellcheck"
+shfmt = "aqua:mvdan/sh"
+
+[tools]
+# releases: https://github.com/babashka/babashka/releases
+# changelog: https://github.com/babashka/babashka/blob/master/CHANGELOG.md
+# Remember! On a bump, sync the deps marked "Built into babashka" in deps.edn.
+babashka = { version = "1.13.220", depends = ["java"] }
+
+# releases: https://github.com/bats-core/bats-core/releases
+# changelog: https://github.com/bats-core/bats-core/blob/master/docs/CHANGELOG.md
+bats = "1.14.0"
+
+# versions: https://github.com/adoptium/temurin21-binaries/releases
+# changelog: https://adoptium.net/temurin/release-notes/?version=21 (skip)
+# Babashka runs on it. Nothing in this repo calls java directly.
+java = "temurin-21.0.12+101.0.LTS"
+
+# releases: https://github.com/koalaman/shellcheck/releases
+# changelog: https://github.com/koalaman/shellcheck/blob/master/CHANGELOG.md
+shellcheck = "0.11.0"
+
+# releases: https://github.com/mvdan/sh/releases
+# changelog: https://github.com/mvdan/sh/blob/master/CHANGELOG.md
+# The tool lives in the mvdan/sh repo, the command is `shfmt`.
+shfmt = "3.14.1"
+
+[tasks."deps"]
+run = "mise outdated --bump"
+[tasks."deps:upgrade"]
+run = "mise outdated --bump && mise upgrade --bump --interactive"
+
+# `mise lock` only updates or adds entries, it never drops them. After renaming a
+# tool key the entry under the old name stays in the lockfile, so recreate the
+# file from scratch instead of refreshing it in place.
+[tasks."lock:recreate"]
+description = "Recreate mise.lock from scratch"
+run = "rm -f mise.lock && mise lock"

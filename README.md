@@ -16,7 +16,7 @@ sosh a shell tool that uses `source` declaration in shell scripts to fetch remot
 
 Example: let's assume you need some color definitions and functions to serialize arrays in a Bash script. You can take them adding following `source` declaration:
 ```bash
-source "${ROOT_DIR}/.github_deps/rynkowsg/shell-gr@v0.2.2/lib/color.bash"
+source "${ROOT_DIR}/.github_deps/rynkowsg/shell-gr@v0.7.0/lib/color.bash"
 source "${ROOT_DIR}/.https_deps/gist.githubusercontent.com/TekWizely/c0259f25e18f2368c4a577495cd566cd/raw/b9e87c74565fb90a39bb7a1033f950773201dbf7/serialize_array.bash"
 ```
 If you call `sosh fetch` on the script, sosh will get these files for you.
@@ -79,25 +79,56 @@ Some aspects are better explained in [CHANGELOG](https://github.com/rynkowsg/sos
 **Examples**
 
 I use this tools in my own repos:
-- [rynkowsg/asdf-orb] - CircleCI orb providing asdf ()
+- [rynkowsg/asdf-orb] - CircleCI orb providing asdf
 - [rynkowsg/checkout-orb] - CircleCI orb providing advanced checkout
-- [rynkowsg/shell-gr]- my library of bash snippets ([lib examples](https://github.com/rynkowsg/shell-gr/blob/main/lib/))
+- [rynkowsg/shell-gr] - my library of bash snippets ([lib examples](https://github.com/rynkowsg/shell-gr/tree/main/lib))
 
 Examples:
 - source remote scripts from github:
   - [install_asdf.bash](https://github.com/rynkowsg/asdf-orb/blob/main/src/scripts/install_asdf.bash) - script behind [rynkowsg/asdf-orb]
   - [clone_git_repo.bash](https://github.com/rynkowsg/checkout-orb/blob/main/src/scripts/clone_git_repo.bash) - script behind [rynkowsg/checkout-orb]
 - source remote scripts by URL:
-  - [bats_assert.bash](https://github.com/rynkowsg/shell-gr/blob/dev/lib/bats_assert.bash) - wrapper for bats_assert to fetch all necessary files at once
+  - [bats_assert.bash](https://github.com/rynkowsg/shell-gr/blob/main/lib/bats_assert.bash) - wrapper for bats_assert to fetch all necessary files at once
 - path initialization in a remote script that requires yet another scripts[^re-path-initialization]:
-  - [error.bash](https://github.com/rynkowsg/shell-gr/blob/dev/lib/error.bash#L5)
-  - most of the files in [shell-gr repository](https://github.com/rynkowsg/shell-gr/tree/dev/lib)
+  - [error.bash](https://github.com/rynkowsg/shell-gr/blob/main/lib/error.bash#L5)
+  - most of the files in [shell-gr repository](https://github.com/rynkowsg/shell-gr/tree/main/lib)
 
 [^re-path-initialization]: Path initialization can be complicated, especially when writing bits sourcing other bits.
 
 [rynkowsg/asdf-orb]: https://github.com/rynkowsg/asdf-orb
 [rynkowsg/checkout-orb]: https://github.com/rynkowsg/checkout-orb
 [rynkowsg/shell-gr]: https://github.com/rynkowsg/shell-gr
+
+## Development
+
+Every tool this repo needs is pinned in [`mise.toml`](mise.toml), down to an exact version, and
+`mise.lock` records the download URL and checksum for each one. Install [mise](https://mise.jdx.dev/)
+yourself; it brings the rest - Babashka, Java, bats, shellcheck and shfmt.
+
+```sh
+mise trust    # mise ignores a config it doesn't trust
+mise install
+```
+
+The tools reach `PATH` through the `mise activate` hook in your shell rc.
+
+With [direnv](https://direnv.net/), `direnv allow` does the install for you on entering the directory,
+and repeats it whenever `mise.toml` changes. Copy `.envrc.local.example` to `.envrc.local` for values
+that belong to your machine rather than the repo, such as `MISE_GITHUB_TOKEN`.
+
+Then the tasks:
+
+| Command             | What it does                                            |
+|---------------------|---------------------------------------------------------|
+| `bb lint`           | shellcheck over the bash and bats files                 |
+| `bb format`         | shfmt over the same files, `bb format check` to verify  |
+| `bb test`           | the bats suite, plus the test runs under bb and the JVM |
+| `bb deps`           | report outdated Clojure dependencies                    |
+| `mise run deps`     | report outdated tools                                   |
+| `mise deps:upgrade` | bump the tool versions, interactively                   |
+
+`bb lint` and `bb format` start by running sosh on their own scripts, so the shell-gr files they
+source get fetched first.
 
 ## License
 

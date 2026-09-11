@@ -1,8 +1,12 @@
-{:deps {this/repo {:local/root "."}}
+{:deps {;; sorted
+        pl.rynkowski.clj-gr/bb #:git{:url "https://github.com/rynkowsg/clj-gr.git" :tag "v0.0.16" :sha "0faa2b49cff2ececa783c43201971b5195c86054" :deps/root "lib/bb"}
+        this/repo {:local/root "."}}
 
  :tasks
- {:requires ([babashka.fs :as fs]
-             [clojure.string :as str])
+ {:requires (#_:sorted
+             [babashka.fs :as fs]
+             [clojure.string :as str]
+             [pl.rynkowski.clj-gr.bb :refer [print-exec]])
   :init (do (def sosh (fs/path (fs/cwd) "main/src/pl/rynkowski/sosh.cljc")))
 
   deps (print-exec '(clojure "-M:tool/antq -m antq.core") *command-line-args*)

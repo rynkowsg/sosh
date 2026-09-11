@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Copy to .envrc.local and fill in your machine-local values.
+
+export CIRCLE_TOKEN=
+export MISE_GITHUB_TOKEN=
+export GH_TOKEN=

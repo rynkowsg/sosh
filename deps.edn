@@ -1,13 +1,14 @@
 {:paths ["main/src"]
 
- :deps {;; sorted
-        babashka/fs {:mvn/version "0.5.20"}
-        babashka/process {:mvn/version "0.5.22"}
-        http-kit/http-kit {:mvn/version "2.7.0"}
-        org.babashka/cli {:mvn/version "0.8.57"}
-        org.clojure/clojure {:mvn/version "1.11.1"}
-        pl.rynkowski.clj-gr/fs {:git/url "https://github.com/rynkowsg/clj-gr.git" :git/sha "80e9dc0bd21c538ff443d8edc7df85f89d589a82" :deps/root "lib/fs"}
-        pl.rynkowski.clj-gr/lang {:git/url "https://github.com/rynkowsg/clj-gr.git" :git/sha "80e9dc0bd21c538ff443d8edc7df85f89d589a82" :deps/root "lib/lang"}
+ :deps {;; Built into babashka
+        babashka/fs ^:antq/exclude {:mvn/version "0.5.34"}
+        babashka/process ^:antq/exclude {:mvn/version "0.6.25"}
+        http-kit/http-kit ^:antq/exclude {:mvn/version "2.9.0-beta4"}
+        org.babashka/cli ^:antq/exclude {:mvn/version "0.12.88"}
+        org.clojure/clojure ^:antq/exclude {:mvn/version "1.12.5"}
+        ;; Not in babashka. Keep in sync with add-deps in main/src/pl/rynkowski/sosh.cljc.
+        pl.rynkowski.clj-gr/fs {:git/url "https://github.com/rynkowsg/clj-gr.git" :git/sha "0faa2b49cff2ececa783c43201971b5195c86054" :deps/root "lib/fs"}
+        pl.rynkowski.clj-gr/lang {:git/url "https://github.com/rynkowsg/clj-gr.git" :git/sha "0faa2b49cff2ececa783c43201971b5195c86054" :deps/root "lib/lang"}
         #_:deps}
 
  :aliases
@@ -16,13 +17,13 @@
   :test {:extra-paths ["test/src" "test/res"]
          :extra-deps {;; sorted
                       io.github.matthewdowney/rich-comment-tests {:git/tag "v1.0.3" :git/sha "a8711e9"}
-                      lambdaisland/kaocha {:mvn/version "1.87.1366"}
+                      lambdaisland/kaocha {:mvn/version "1.91.1392"}
                       lambdaisland/kaocha-cloverage {:mvn/version "1.1.89"}
                       #_:extra-deps}}
 
   :tool/antq
   {:replace-paths []
-   :replace-deps {com.github.liquidz/antq {:mvn/version "2.8.1173"}
-                  org.slf4j/slf4j-nop {:mvn/version "2.0.11"}}}
+   :replace-deps {com.github.liquidz/antq {:mvn/version "2.11.1276"}
+                  org.slf4j/slf4j-nop {:mvn/version "2.0.19"}}}
 
   #_:aliases}}
