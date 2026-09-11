@@ -9,7 +9,7 @@ orbs:
   mise: rynkowsg/mise@0.1.0
 
 executors:
-  docker_base_small:
+  docker_base_small_x86:
     # https://circleci.com/developer/images/image/cimg/base
     # https://hub.docker.com/r/cimg/base/tags
     docker: [{image: 'cimg/base:2026.09-24.04'}]
@@ -17,7 +17,7 @@ executors:
 
 jobs:
   test:
-    executor: docker_base_small
+    executor: docker_base_small_x86
     steps:
       - checkout/checkout: {depth: 1}
       - mise/setup:
